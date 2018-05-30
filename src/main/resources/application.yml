@@ -1,0 +1,35 @@
+server:
+    port: 8777
+    context-path: /esgov-jrw-jrwservice
+
+spring:
+    datasource:
+        url: jdbc:mysql://127.0.0.1:8806/hello?useUnicode=true&characterEncoding=utf8
+        username: hello
+        password: hello
+        driver-class-name: com.mysql.jdbc.Driver
+    application:
+        name: esgov-jrw-jrwservice
+    cloud:
+        zookeeper:
+            connect-string: 10.142.233.80:8181
+            discovery:
+                register: true
+                instance-host: ${KETTY_IP}
+                instance-port: ${server.port}
+                instance-id: ${spring.cloud.zookeeper.discovery.instance-host}:${spring.cloud.zookeeper.discovery.instance-port}
+
+mybatis:
+    type-aliases-package: com.esgov.jrw.jrwservice.entity
+    mapper-locations:
+    - classpath:mapper/*.xml
+    - classpath:dao/*.xml
+    configuration:
+        map-underscore-to-camel-case: true
+
+swagger:
+    basePackage: com.esgov.jrw.jrwservice.controller
+    title: esgov-jrw-jrwservice RESTful APIs
+    description: esgov-jrw-jrwservice RESTful API 文档
+    version: 1.0.0-SNAPSHOT
+
