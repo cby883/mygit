@@ -122,11 +122,6 @@
 			<version>2.1.9</version>
 		</dependency>
 		<dependency>
-			<groupId>com.esgov.jrw</groupId>
-			<artifactId>esgov-jrw-jrwserviceintf</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<version>1.5.9.RELEASE</version>
