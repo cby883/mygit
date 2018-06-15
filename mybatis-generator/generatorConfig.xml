@@ -17,8 +17,8 @@
 
         <!--数据库连接 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:8806/ctgae" userId="hello"
-                        password="hello">
+                        connectionURL="jdbc:mysql://14.215.116.215:3306/zshjq_jwb" userId="zshj"
+                        password="zshjjrb">
         </jdbcConnection>
         <!--默认false Java type resolver will always use java.math.BigDecimal if
             the database column is of type DECIMAL or NUMERIC. -->

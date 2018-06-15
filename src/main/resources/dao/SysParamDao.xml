@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esgov.jrw.sysmgrservice.dao.authority.SysParamDao">
+    <resultMap id="BaseResultMap" type="com.esgov.jrw.sysmgrservice.entity.authority.SysParam">
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="creator" jdbcType="VARCHAR" property="creator" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+        <result column="code" jdbcType="VARCHAR" property="code" />
+        <result column="isdef" jdbcType="VARCHAR" property="isdef" />
+        <result column="param_type_code" jdbcType="VARCHAR" property="paramTypeCode" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+        <result column="seq" jdbcType="INTEGER" property="seq" />
+        <result column="value" jdbcType="VARCHAR" property="value" />
+        <result column="param_type_id" jdbcType="VARCHAR" property="paramTypeId" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, create_time, creator, status, update_time, update_user, code, isdef, param_type_code,
+    remark, seq, value, param_type_id
+  </sql>
+
+
+    <!-- 查询是否存在参数 -->
+    <select id="checkByCode" parameterType="com.esgov.jrw.sysmgrservice.entity.authority.SysParam" resultType="int">
+        select
+        count(1)
+        from sys_param
+        where code = #{code,jdbcType=VARCHAR}
+        AND
+        param_type_code =#{paramTypeCode,jdbcType=VARCHAR}
+        AND status='1'
+    </select>
+    <!--查询所有参数字典-->
+    <select id="getAllSysParam" resultMap="BaseResultMap">
+        SELECT         <include refid="Base_Column_List" />
+        FROM sys_param
+        WHERE  status='1'
+    </select>
+
+    <!--根据参数类型ID分页查询参数字典-->
+    <select id="queryPageBySelective" parameterType="string" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_param
+        WHERE  status='1' AND param_type_id=#{typeId} order BY  seq
+    </select>
+
+    <!--根据参数类型ID分页查询参数字典-->
+    <select id="getParamsByTypeId" parameterType="string" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_param
+        WHERE  status='1' AND param_type_id=#{typeId}
+    </select>
+
+    <!--根据参数类型code查询参数字典值-->
+    <select id="getParamsByTypeCode" parameterType="string" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_param
+        WHERE  status='1' AND param_type_code=#{typeCode} order BY  seq
+    </select>
+
+    <!--根据参数类型Code和参数code查询对应参数信息-->
+    <select id="getParamByTypeCodeAndCode"   resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sys_param
+        WHERE  status='1' AND param_type_code=#{paramTypeCode} AND code=#{paramCode}
+    </select>
+
+</mapper>

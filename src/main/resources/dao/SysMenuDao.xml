@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esgov.jrw.sysmgrservice.dao.authority.SysMenuDao">
+    <resultMap id="BaseResultMap" type="com.esgov.jrw.sysmgrservice.entity.authority.SysMenu">
+        <id column="id" jdbcType="VARCHAR" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="url" jdbcType="VARCHAR" property="url" />
+        <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+        <result column="order_by" jdbcType="INTEGER" property="orderBy" />
+        <result column="plat_form" jdbcType="VARCHAR" property="platForm" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="creator" jdbcType="VARCHAR" property="creator" />
+        <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+        <result column="is_used" jdbcType="CHAR" property="isUsed" />
+        <result column="is_external_link" jdbcType="CHAR" property="isExternalLink" />
+        <result column="icon" jdbcType="VARCHAR" property="icon" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, name, url, parent_id, order_by, plat_form, status, create_time, creator, update_user,
+        update_time, remark, is_used, is_external_link, icon
+    </sql>
+    <select id="getMenuListByParentId" parameterType="java.lang.String" resultType="com.esgov.jrw.sysmgrservice.entity.authority.SysMenu">
+        select
+        <include refid="Base_Column_List" />
+        from sys_menu
+        where  parent_id = #{menuId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="queryPage" parameterType="com.esgov.jrw.sysmgrservice.entity.authority.SysMenu" resultType="com.esgov.jrw.sysmgrservice.entity.authority.SysMenu">
+        SELECT
+        alias_menu.id id,
+        alias_menu.NAME NAME,
+        alias_menu.parent_id parentId,
+        alias_menu.url url,
+        alias_menu.is_used isUsed,
+        alias_menu.order_by orderBy,
+        alias_menu.remark remark,
+        alias_pmenu.NAME parentMenuName,
+        alias_uparam.VALUE
+        isUsedValue,
+        alias_pparam.VALUE platFormValue
+        FROM
+        sys_menu alias_menu
+        LEFT JOIN sys_menu alias_pmenu ON (
+        alias_menu.parent_id = alias_pmenu.id
+        )
+        LEFT JOIN sys_param alias_uparam ON (
+        alias_menu.is_used = alias_uparam. CODE
+        AND alias_uparam.param_type_code = 'public_true_or_false'
+        )
+        LEFT JOIN sys_param alias_pparam ON (
+        alias_menu.plat_form = alias_pparam. CODE
+        AND alias_pparam.param_type_code = 'public_front_type'
+        )
+        WHERE
+        alias_menu. STATUS = '1'
+        <if test="name != null and name != ''">
+            and alias_menu.name like concat('%',#{name},'%')
+        </if>
+        <if test="platForm != null and platForm != ''">
+            and alias_menu.plat_form = #{platForm}
+        </if>
+        <if test="parentId != null and parentId != ''">
+            and alias_menu.parent_id = #{parentId}
+        </if>
+        <if test="url != null and url != ''">
+            and alias_menu.url like concat('%',#{url},'%')
+        </if>
+        <if test="isUsed != null  and isUsed != '' ">
+            and alias_menu.is_used = #{isUsed}
+        </if>
+    </select>
+
+    <select id="isExistMenu" parameterType="com.esgov.jrw.sysmgrservice.entity.authority.SysMenu" resultType="java.lang.Integer">
+        select count(*) from sys_menu
+        where  name = #{name} and plat_form = #{platForm} and id != #{id}
+    </select>
+
+
+    <!--获取所有的树节点-->
+    <select id="getTree" resultType="java.util.Map">
+        SELECT id,parent_id,name,url from sys_menu WHERE status='1'
+    </select>
+
+    <!--根据父id获取对应的子菜单list-->
+    <select id="getSubMenu" parameterType="string" resultType="com.esgov.jrw.sysmgrservice.entity.authority.SysMenu">
+        select
+          <include refid="Base_Column_List" />
+        from sys_menu where parent_id = #{parentId}
+        ORDER BY order_by
+    </select>
+
+    <select id="getAllMenu" resultType="com.esgov.jrw.sysmgrservice.entity.authority.SysMenu">
+        SELECT
+        <include refid="Base_Column_List" />
+        from sys_menu
+    </select>
+
+</mapper>

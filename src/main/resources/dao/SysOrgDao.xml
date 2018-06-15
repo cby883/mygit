@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esgov.jrw.sysmgrservice.dao.authority.SysOrgDao">
+  <resultMap id="BaseResultMap" type="com.esgov.jrw.sysmgrservice.entity.authority.SysOrg">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="org_type" jdbcType="VARCHAR" property="orgType" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="is_used" jdbcType="CHAR" property="isUsed" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, org_type, remark, parent_id, is_used, status, create_time, creator, update_user, 
+    update_time
+  </sql>
+
+    <!--检查机构名称是否存在-->
+  <select id="checkOrgName" parameterType="com.esgov.jrw.sysmgrservice.entity.authority.SysOrg" resultType="java.lang.Integer">
+    SELECT count(1)
+    FROM sys_org
+    <where>
+      status='1'
+      <if test="name!=null">
+        and name=#{name}
+      </if>
+      <if test="orgType!=null">
+        and org_type=#{orgType}
+      </if>
+    </where>
+  </select>
+    <!--分页查询-->
+    <select id="queryPageBySelective" parameterType="com.esgov.jrw.sysmgrservice.entity.authority.SysOrg" resultType="com.esgov.jrw.sysmgrservice.entity.authority.SysOrg">
+        SELECT   alias_org.id id,
+                 alias_org.name name,
+                 alias_org.parent_id parentId,
+                 alias_org.remark remark,
+                 alias_org.is_used isUsed,
+                 alias_org.org_type orgType,
+                 alias_param.value orgTypeValue
+                 from  sys_org alias_org
+                 left join sys_param alias_param on ( alias_org.org_type = alias_param.code and alias_param.param_type_code = 'sys_org_type' and alias_param.status='1' )
+        where alias_org.status='1'
+        <if test="name!=null and name!=''">
+            and alias_org.name  like  CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="isUsed!=null and isUsed!=''">
+            and alias_org.is_used = #{isUsed}
+        </if>
+        ORDER BY alias_org.create_time DESC
+    </select>
+
+    <!--获取所有的树节点-->
+    <select id="getTree" resultType="java.util.Map">
+        SELECT id,parent_id,name from sys_org WHERE status='1'
+    </select>
+
+    <!--获得下一级子机构-->
+    <select id="getChildOrg" parameterType="string" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM sys_org
+        WHERE parent_id=#{id}
+        AND status='1'
+    </select>
+</mapper>

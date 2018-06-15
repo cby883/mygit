@@ -1,4 +1,4 @@
-package com.esgov.jrw;
+package com.esgov.jrw.sysmgrservice;
 
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.esgov.jrw.sysmgrservice.dao.authority.SysUserDao">
+  <resultMap id="BaseResultMap" type="com.esgov.jrw.sysmgrservice.entity.authority.SysUser">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
+    <result column="login_pwd" jdbcType="VARCHAR" property="loginPwd" />
+    <result column="cn_name" jdbcType="VARCHAR" property="cnName" />
+    <result column="mobile_phone" jdbcType="VARCHAR" property="mobilePhone" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="remarks" jdbcType="VARCHAR" property="remarks" />
+    <result column="id_card" jdbcType="VARCHAR" property="idCard" />
+    <result column="birth" jdbcType="DATE" property="birth" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="department_id" jdbcType="VARCHAR" property="departmentId" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="is_communist_party_member" jdbcType="CHAR" property="isCommunistPartyMember" />
+    <result column="is_used" jdbcType="CHAR" property="isUsed" />
+    <result column="duties" jdbcType="VARCHAR" property="duties" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, login_name, login_pwd, cn_name, mobile_phone, telephone, email, remarks, id_card, 
+    birth, sex, department_id, education, address, is_communist_party_member, is_used, 
+    duties, status, creator, create_time, update_user, update_time
+  </sql>
+  <select id="getUserByLoginName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_user
+    where login_name = #{loginName,jdbcType=VARCHAR}
+  </select>
+
+  <select id="queryPage" parameterType="com.esgov.jrw.sysmgrservice.entity.authority.SysUser" resultType="com.esgov.jrw.sysmgrservice.entity.authority.SysUser">
+    SELECT
+    <include refid="Base_Column_List" />
+    from  sys_user
+    where 1=1 and status = 1
+    <if test="cnName!=null and cnName != '' " >
+      and cn_name  like concat('%',#{cnName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="loginName!=null  and loginName != '' ">
+      and login_name  like concat('%',#{loginName,jdbcType=VARCHAR},'%')
+    </if>
+    <if test="isUsed!=null  and isUsed != '' ">
+      and is_used = #{isUsed}
+    </if>
+    ORDER BY create_time DESC
+  </select>
+
+  <update id="updateStatusById" parameterType="java.lang.String">
+    update  sys_user SET status = 0
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="isExistUser" parameterType="com.esgov.jrw.sysmgrservice.entity.authority.SysUser" resultType="int">
+    SELECT count(1)
+    FROM sys_user
+    where 1=1 and status='1'
+      and login_name = #{loginName} and id != #{id}
+  </select>
+</mapper>
