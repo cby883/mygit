@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.esgov.jrw.sysmgrservice.dao.authority.SysMenuDao">
-    <resultMap id="BaseResultMap" type="com.esgov.jrw.sysmgrservice.entity.authority.SysMenu">
+<mapper namespace="com.esgov.jrw.jrwservice.dao.authority.SysMenuDao">
+    <resultMap id="BaseResultMap" type="com.esgov.jrw.jrwservice.entity.authority.SysMenu">
         <id column="id" jdbcType="VARCHAR" property="id" />
         <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="url" jdbcType="VARCHAR" property="url" />
@@ -22,14 +22,14 @@
         id, name, url, parent_id, order_by, plat_form, status, create_time, creator, update_user,
         update_time, remark, is_used, is_external_link, icon
     </sql>
-    <select id="getMenuListByParentId" parameterType="java.lang.String" resultType="com.esgov.jrw.sysmgrservice.entity.authority.SysMenu">
+    <select id="getMenuListByParentId" parameterType="java.lang.String" resultType="com.esgov.jrw.jrwservice.entity.authority.SysMenu">
         select
         <include refid="Base_Column_List" />
         from sys_menu
         where  parent_id = #{menuId,jdbcType=VARCHAR}
     </select>
 
-    <select id="queryPage" parameterType="com.esgov.jrw.sysmgrservice.entity.authority.SysMenu" resultType="com.esgov.jrw.sysmgrservice.entity.authority.SysMenu">
+    <select id="queryPage" parameterType="com.esgov.jrw.jrwservice.entity.authority.SysMenu" resultType="com.esgov.jrw.jrwservice.entity.authority.SysMenu">
         SELECT
         alias_menu.id id,
         alias_menu.NAME NAME,
@@ -74,7 +74,7 @@
         </if>
     </select>
 
-    <select id="isExistMenu" parameterType="com.esgov.jrw.sysmgrservice.entity.authority.SysMenu" resultType="java.lang.Integer">
+    <select id="isExistMenu" parameterType="com.esgov.jrw.jrwservice.entity.authority.SysMenu" resultType="java.lang.Integer">
         select count(*) from sys_menu
         where  name = #{name} and plat_form = #{platForm} and id != #{id}
     </select>
@@ -86,14 +86,14 @@
     </select>
 
     <!--根据父id获取对应的子菜单list-->
-    <select id="getSubMenu" parameterType="string" resultType="com.esgov.jrw.sysmgrservice.entity.authority.SysMenu">
+    <select id="getSubMenu" parameterType="string" resultType="com.esgov.jrw.jrwservice.entity.authority.SysMenu">
         select
           <include refid="Base_Column_List" />
         from sys_menu where parent_id = #{parentId}
         ORDER BY order_by
     </select>
 
-    <select id="getAllMenu" resultType="com.esgov.jrw.sysmgrservice.entity.authority.SysMenu">
+    <select id="getAllMenu" resultType="com.esgov.jrw.jrwservice.entity.authority.SysMenu">
         SELECT
         <include refid="Base_Column_List" />
         from sys_menu

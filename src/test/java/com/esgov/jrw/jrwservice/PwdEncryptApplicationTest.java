@@ -21,10 +21,12 @@ public class PwdEncryptApplicationTest {
 
     @Test
     public void encryptPwd() {
-        try{
-        String result = stringEncryptor.encrypt("要加密的串");
-        System.out.println(result);
-        }catch (Exception e){
+        try {
+            String result = stringEncryptor.encrypt("zshj");
+            System.out.println(result);
+            result = stringEncryptor.encrypt("zshjjrb");
+            System.out.println(result);
+        } catch (Exception e) {
 
         }
     }

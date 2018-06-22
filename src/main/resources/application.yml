@@ -9,7 +9,7 @@ spring:
         driver-class-name: com.mysql.jdbc.Driver
 
     application:
-        name: esgov-jrw-sysmgrservice
+        name: esgov-jrw-jrwservice
     cloud:
         zookeeper:
             connect-string: 10.142.233.80:8181
@@ -22,9 +22,9 @@ spring:
 mybatis-plus:
     mapper-locations: classpath:/dao/*Dao.xml
     #实体扫描，多个package用逗号或者分号分隔
-    typeAliasesPackage: com.esgov.jrw.sysmgrservice.entity.*
+    typeAliasesPackage: com.esgov.jrw.jrwservice.entity.*
     #通用枚举
-    typeEnumsPackage: com.esgov.jrw.sysmgrservice.entity.enums
+    typeEnumsPackage: com.esgov.jrw.jrwservice.entity.enums
     global-config:
         id-type: 3
         #逻辑删除配置
@@ -43,6 +43,6 @@ jasypt:
     password: esgov
 swagger:
     basePackage: com.esgov.jrw.jrwservice.controller
-    title: esgov-jrw-sysmgrservice RESTful APIs
-    description: esgov-jrw-sysmgrservice RESTful API 文档
+    title: esgov-jrw-jrwservice RESTful APIs
+    description: esgov-jrw-jrwservice RESTful API 文档
     version: 1.0.0-SNAPSHOT

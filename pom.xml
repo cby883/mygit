@@ -164,7 +164,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.4</version>
                 <configuration>
-                    <warName>esgov-ums-sysmgrservice</warName>
+                    <warName>esgov-ums-jrwservice</warName>
                 </configuration>
             </plugin>
 

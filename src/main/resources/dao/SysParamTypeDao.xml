@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.esgov.jrw.sysmgrservice.dao.authority.SysParamTypeDao">
-    <resultMap id="BaseResultMap" type="com.esgov.jrw.sysmgrservice.entity.authority.SysParamType">
+<mapper namespace="com.esgov.jrw.jrwservice.dao.authority.SysParamTypeDao">
+    <resultMap id="BaseResultMap" type="com.esgov.jrw.jrwservice.entity.authority.SysParamType">
         <id column="id" jdbcType="VARCHAR" property="id" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
         <result column="creator" jdbcType="VARCHAR" property="creator" />
@@ -17,7 +17,7 @@
   </sql>
 
     <!--检查参数类型是否存在-->
-    <select id="checkByTypeCode" parameterType="com.esgov.jrw.sysmgrservice.entity.authority.SysParamType" resultType="int">
+    <select id="checkByTypeCode" parameterType="com.esgov.jrw.jrwservice.entity.authority.SysParamType" resultType="int">
         SELECT count(1)
         FROM sys_param_type
         WHERE
@@ -31,7 +31,7 @@
         WHERE status='1'
 
     </select>
-    <select id="queryPageBySelective" parameterType="com.esgov.jrw.sysmgrservice.entity.authority.SysParamType" resultMap="BaseResultMap">
+    <select id="queryPageBySelective" parameterType="com.esgov.jrw.jrwservice.entity.authority.SysParamType" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List" />
         FROM sys_param_type

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.esgov.jrw.sysmgrservice.dao.authority.SysOrgDao">
-  <resultMap id="BaseResultMap" type="com.esgov.jrw.sysmgrservice.entity.authority.SysOrg">
+<mapper namespace="com.esgov.jrw.jrwservice.dao.authority.SysOrgDao">
+  <resultMap id="BaseResultMap" type="com.esgov.jrw.jrwservice.entity.authority.SysOrg">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="org_type" jdbcType="VARCHAR" property="orgType" />
@@ -20,7 +20,7 @@
   </sql>
 
     <!--检查机构名称是否存在-->
-  <select id="checkOrgName" parameterType="com.esgov.jrw.sysmgrservice.entity.authority.SysOrg" resultType="java.lang.Integer">
+  <select id="checkOrgName" parameterType="com.esgov.jrw.jrwservice.entity.authority.SysOrg" resultType="java.lang.Integer">
     SELECT count(1)
     FROM sys_org
     <where>
@@ -34,7 +34,7 @@
     </where>
   </select>
     <!--分页查询-->
-    <select id="queryPageBySelective" parameterType="com.esgov.jrw.sysmgrservice.entity.authority.SysOrg" resultType="com.esgov.jrw.sysmgrservice.entity.authority.SysOrg">
+    <select id="queryPageBySelective" parameterType="com.esgov.jrw.jrwservice.entity.authority.SysOrg" resultType="com.esgov.jrw.jrwservice.entity.authority.SysOrg">
         SELECT   alias_org.id id,
                  alias_org.name name,
                  alias_org.parent_id parentId,

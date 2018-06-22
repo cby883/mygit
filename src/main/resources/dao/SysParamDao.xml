@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.esgov.jrw.sysmgrservice.dao.authority.SysParamDao">
-    <resultMap id="BaseResultMap" type="com.esgov.jrw.sysmgrservice.entity.authority.SysParam">
+<mapper namespace="com.esgov.jrw.jrwservice.dao.authority.SysParamDao">
+    <resultMap id="BaseResultMap" type="com.esgov.jrw.jrwservice.entity.authority.SysParam">
         <id column="id" jdbcType="VARCHAR" property="id" />
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
         <result column="creator" jdbcType="VARCHAR" property="creator" />
@@ -23,7 +23,7 @@
 
 
     <!-- 查询是否存在参数 -->
-    <select id="checkByCode" parameterType="com.esgov.jrw.sysmgrservice.entity.authority.SysParam" resultType="int">
+    <select id="checkByCode" parameterType="com.esgov.jrw.jrwservice.entity.authority.SysParam" resultType="int">
         select
         count(1)
         from sys_param

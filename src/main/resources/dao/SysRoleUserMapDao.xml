@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.esgov.jrw.sysmgrservice.dao.authority.SysRoleUserMapDao">
+<mapper namespace="com.esgov.jrw.jrwservice.dao.authority.SysRoleUserMapDao">
     <update id="updateUsedStatusByUserId">
         update sys_role_user_map SET used = #{used,jdbcType=VARCHAR}
         where user_id = #{id,jdbcType=VARCHAR}
