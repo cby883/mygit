@@ -31,7 +31,7 @@ public class SysMenuController {
         return sysMenuService.update(sysMenu);
     }
     @RequestMapping(value = BASE_PATH+"/{id}",method = RequestMethod.GET)
-    ServiceResponse get(@PathVariable("id")String id){
+    public ServiceResponse get(@PathVariable("id") String id){
         return sysMenuService.get(id);
     }
     @RequestMapping(value =  BASE_PATH+"/{currentPage}/{pageSize}",method = RequestMethod.POST)
