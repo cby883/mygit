@@ -36,7 +36,7 @@ public class AttachmentControllerTest {
         attachment.setTargetFlag("xx");
         attachment.setTargetType("xxxxx");
         attachment.setTargetId("xxxxxxxxxxxxxxxxxx");
-        attachment.setStatus(StatusEnum.NORMAL);
+        attachment.setStatus("1");
         attachment.setCreator("xxx");
         attachment.setCreateTime(new Date());
         attachment.setUpdateUser("yyyy");

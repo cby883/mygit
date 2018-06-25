@@ -9,7 +9,7 @@ public class BaseEntity {
 
     private String id;
     @TableLogic
-    private StatusEnum status;
+    private String status;
     private String creator;
     private Date createTime;
     private String updateUser;
@@ -23,11 +23,11 @@ public class BaseEntity {
         this.id = id;
     }
 
-    public StatusEnum getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(StatusEnum status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
