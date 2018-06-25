@@ -62,4 +62,16 @@ public class AttachmentServiceImpl implements AttachmentService {
         }
         return ServiceResponse.createSuccessByData(attachmentList);
     }
+
+    @Override
+    public ServiceResponse get(String id) {
+        Attachment attachment = null;
+        try {
+             attachment = attachmentDao.selectById(id);
+        } catch (Exception e) {
+            logger.error(e.toString(),e.fillInStackTrace());
+            return ServiceResponse.createError();
+        }
+        return ServiceResponse.createSuccessByData(attachment);
+    }
 }

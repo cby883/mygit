@@ -9,4 +9,6 @@ public interface AttachmentService {
     public ServiceResponse delete(String id);
 
     public ServiceResponse findByTarget(String targetType, String targetId, String targetFlag);
+
+    public ServiceResponse get(String id);
 }

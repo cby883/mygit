@@ -20,7 +20,6 @@ import java.util.Date;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EnableAutoConfiguration
-
 public class AttachmentControllerTest {
 
     @Autowired
@@ -51,6 +50,12 @@ public class AttachmentControllerTest {
     @Test
     public void delete(){
         ServiceResponse response = attachmentController.delete("8d1b2632963640aa835cd5e6b885d608");
+        System.out.println(ToStringBuilder.reflectionToString(response));
+    }
+
+    @Test
+    public void get(){
+        ServiceResponse response = attachmentController.get("b80a16abd8bd44f986666b9b11e35001");
         System.out.println(ToStringBuilder.reflectionToString(response));
     }
 

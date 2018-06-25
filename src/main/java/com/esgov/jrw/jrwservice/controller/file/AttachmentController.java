@@ -34,10 +34,17 @@ public class AttachmentController {
 
 
     @ApiOperation(value = "删除附件",
-            notes = "根据url的id删除指定的附件")
+            notes = "根据id删除指定的附件")
     @DeleteMapping(value ="/{id}")
     ServiceResponse delete(@ApiParam(value = "附件id",required = true)@PathVariable("id") String id){
         return attachmentService.delete(id);
+    }
+
+    @ApiOperation(value = "根据ID查询附件",
+            notes = "根据id查询附件")
+    @GetMapping(value ="/{id}")
+    ServiceResponse get(@ApiParam(value = "附件id",required = true)@PathVariable("id") String id){
+        return attachmentService.get(id);
     }
 
     @ApiOperation(value = "查询附件",
@@ -47,7 +54,7 @@ public class AttachmentController {
                                  @RequestParam("targetType") String targetType,
                                  @ApiParam(value = "targetId",required = true)
                                  @RequestParam("targetId") String targetId,
-                                 @RequestParam("targetFlag") String targetFlag){
+                                 @RequestParam(value = "targetFlag",required = false) String targetFlag){
 
         return attachmentService.findByTarget(targetType,targetId,targetFlag);
     }
