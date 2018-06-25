@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.learnmysql.mapper.EnterpriseMapper" >
+    <resultMap id="BaseResultMap" type="com.example.learnmysql.po.Enterprise" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="short_name" property="shortName" jdbcType="VARCHAR" />
+        <result column="desc" property="desc" jdbcType="VARCHAR" />
+        <result column="found_time" property="foundTime" jdbcType="VARCHAR" />
+        <result column="www" property="www" jdbcType="VARCHAR" />
+        <result column="org_code" property="orgCode" jdbcType="VARCHAR" />
+        <result column="credit_code" property="creditCode" jdbcType="VARCHAR" />
+        <result column="reg_no" property="regNo" jdbcType="VARCHAR" />
+        <result column="reg_capital" property="regCapital" jdbcType="INTEGER" />
+        <result column="business" property="business" jdbcType="VARCHAR" />
+        <result column="trade" property="trade" jdbcType="VARCHAR" />
+        <result column="province" property="province" jdbcType="VARCHAR" />
+        <result column="city" property="city" jdbcType="VARCHAR" />
+        <result column="disttrict" property="disttrict" jdbcType="VARCHAR" />
+        <result column="phone" property="phone" jdbcType="VARCHAR" />
+        <result column="contacts" property="contacts" jdbcType="VARCHAR" />
+        <result column="contacts_post" property="contactsPost" jdbcType="VARCHAR" />
+        <result column="contacts_phone" property="contactsPhone" jdbcType="VARCHAR" />
+        <result column="audit_status" property="auditStatus" jdbcType="VARCHAR" />
+        <result column="level" property="level" jdbcType="VARCHAR" />
+        <result column="flag" property="flag" jdbcType="VARCHAR" />
+        <result column="fi_type" property="fiType" jdbcType="CHAR" />
+        <result column="fi_mode" property="fiMode" jdbcType="CHAR" />
+        <result column="fi_minnum" property="fiMinnum" jdbcType="CHAR" />
+        <result column="fi_maxnum" property="fiMaxnum" jdbcType="CHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="creator" property="creator" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    id, name, short_name, desc, found_time, www, org_code, credit_code, reg_no, reg_capital,
+    business, trade, province, city, disttrict, phone, contacts, contacts_post, contacts_phone,
+    audit_status, level, flag, fi_type, fi_mode, fi_minnum, fi_maxnum, status, creator,
+    create_time, update_user, update_time
+  </sql>
+</mapper>

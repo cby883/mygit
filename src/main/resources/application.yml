@@ -12,12 +12,13 @@ spring:
         name: esgov-jrw-jrwservice
     cloud:
         zookeeper:
-            connect-string: 10.142.233.80:8181
+            connect-string: localhost:2181
             discovery:
                 register: true
-                instance-host: ${KETTY_IP}
+#                instance-host: ${KETTY_IP}
                 instance-port: ${server.port}
                 instance-id: ${spring.cloud.zookeeper.discovery.instance-host}:${spring.cloud.zookeeper.discovery.instance-port}
+                instance-host: localhost
 
 mybatis-plus:
     mapper-locations: classpath:/dao/*Dao.xml
